@@ -1,0 +1,67 @@
+<section class="second">
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h1>{{ api.title }}</h1>
+            </div>
+            <p>AngularJS jest świetnycm narzędziem do komunikacji z obcym serwerem. Pozwala na to koncepcja CORS ( Cross Origin Resource Sharing), jest to
+                zainicjowanie współpracy przeglądarki z serwerem poprzez wysyłanie zapytań i odpowiedzi w celu tymczasowego umożliwienia komunikacji. Serwer, do
+                którego wysyłamy zapytania musi być odpowiednio skomunikowany.</p>
+            <p>Najpopularnijeszymy zapytaniamy są cztery podstawowe GET, POST (PUT), DELETE</p>
+            <p>Nasz serwer możebyć napisany w dowolnym języku: NodeJS, Java. Jedynym wymaganiem jest, aby "wystawiał" na zewnątrz swoje api, z którego możemy
+                skorzystać po stronie przeglądarki.</p>
+            <p>RESTful API – każdy mniej-więcej wie co to jest. Wiemy, że chodzi o HTTP, o różne metody tego protokołu. Przeważnie wiemy, że warto używać JSONa.
+                Niestety często na tym wiedza większości programistów się kończy. Skąd więc możemy wiedzieć, że tworzymy dobre API RESTowe?
+
+                Szczęśliwie mamy model dojrzałości serwisów restowych (Richardson Maturity Model). RMM jest dla nas przewodnikiem po tym jak dobrze zrobić REST.
+                Składa się z kilku pojęć. Im więcej z nich zaimplementujemy tym bardziej RESTowy serwis zrobimy.</p>
+            <p>
+                W naszej aplikacji włączymy się z serwerem <strong>https://ngtests.herokuapp.com</strong>
+                W tym miejscu warto powiedzieć co to jest DAO, będziemy wykorzystywać ten komponent do komunikacji z serwerem/bazą danych.</p>
+            <p>Data Access Object – komponent dostarczający jednolity interfejs do komunikacji między aplikacją a źródłem danych (np. bazą danych czy plikiem).
+                Jest często łączony z innymi wzorcami projektowymi. Dzięki DAO, aplikacja nie musi znać sposobu oraz ostatecznego miejsca składowania swoich
+                danych, a ewentualne modyfikacje któregoś z czynników nie pociągają za sobą konieczności modyfikowania jej kodu źródłowego. Komponent ten jest
+                często stosowany w modelu MVC (Model-View-Controller) do oddzielenia dostępu do danych od logiki biznesowej i warstwy prezentacji. Gotowe
+                narzędzia do korzystania z DAO wchodzą w skład wielu popularnych języków programowania oraz platform (np. Java EE, Ruby on Rails). </p>
+            <p>
+                A oto przykład pliku DAO z naszej aplikacji:
+            <pre>
+(function ()
+{
+    'use strict';
+
+    function HelloAngularDAO($resource)
+    {
+        var api = $resource('https://ngtests.herokuapp.com/api/products/:a/', null, {
+            getProducts: { isArray: true, method: 'GET'}
+        });
+
+        return {
+            getProducts: function()
+            {
+                return api.getProducts().$promise;
+            }
+        };
+    }
+
+    angular.module('helloAngular').factory('HelloAngularDAO', ['$resource', HelloAngularDAO]);
+})();
+        </pre>
+            W tym wypadku łączymy się ze ścieżką <strong>api/products</strong> pod którą otrzymamy spis wszystkich produktów z naszej bazy.
+            </p>
+            <p>Pełne API naszego serwera wygląda następująco:
+            <pre>
+            <strong>GET /api/products</strong>
+
+            Pobieramy całą listę produktów z serwera.
+            Lista pobierana jest w formie tablicy.
+
+
+            <strong>GET /api/product/:id</strong>
+
+            Pobieramy dany produkt po podaniu danego <strong>id</strong>.
+            Produkt jest opadkowany w tablicę
+        </pre></p>
+        </div>
+    </div>
+</section>

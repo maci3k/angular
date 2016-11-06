@@ -1,0 +1,74 @@
+<section class="second">
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h1>TASK</h1>
+            </div>
+            <p>Bogatszy o wiedzę z poprzednich dwóch branchy przeanalizuj budowę projektu. W katalogu modules znajdują się 3 katalogi:
+                <strong>api, dao oraz task</strong>. api oraz task są to widoki, które posiadają controller oraz szablon. W katalogu dao znajduje się serwis
+                odpowiedzialny za pobranie danych z serwera.</p>
+
+            <p>1. Pierwszym zadaniem będzie po przeanalizowaniu pliku <strong>task.controller.js</strong> w katalogu <strong>modules/task</strong> wpisanie
+                odpowiedniego ciała dyrektywy <strong>ng-repeat</strong> w linijce 32. Dane, które zostaną wyświetlone będą danymipobranymi z serwera. Zauważ,
+                że po pobraniu danych możesz wyszukiwać produkty po nazwie. Tak działają <strong>filtry</strong> w ng-repeat.</p>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">szukaj po nazwie: </span>
+                        <input type="search" class="form-control" ng-model="searchTest.name">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid"
+                   aria-describedby="dataTables-example_info">
+                <thead>
+                <tr role="row">
+                    <th>nazwa</th>
+                    <th>cena</th>
+                    <th>ilość</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr role="row" ng-repeat="?????? in ??????? | filter:searchTest">
+                    <td>{{ product.name}}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.count }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>2. Kolejnym zadaniem będzie zmodyfikowanie pliku w katalogu <strong>modules/dao</strong> poprzez dodanie api pobrania pojedynczego produktu.
+                Następnie stworzenie funkcji <strong>load(id)</strong>, która będzie odpowiedzialna za pobranie danego produktu. </p>
+                <p>Dodanie w odpowiednich miejscach do resource pliku DAO
+                <pre>        getProductById: { isArray: true, method: 'GET', params: {a: 'product'}}
+
+        oraz
+
+        getProductById: function (id)
+        {
+            return api.getProductById({b: id}).$promise;
+        }</pre></p>
+            <input type="text" class="form-control col-xs-2" data-ng-model="task.id">
+            <button data-ng-click="task.load(task.id)" class="btn bg-success pull-right">Wczytaj</button>
+
+            <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid"
+                   aria-describedby="dataTables-example_info">
+                <thead>
+                <tr role="row">
+                    <th>nazwa</th>
+                    <th>cena</th>
+                    <th>dostępność</th>
+                    <th>ilość</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr role="row">
+                    <td>{{ task.product[0].name}}</td>
+                    <td>{{ task.product[0].price }}</td>
+                    <td>{{ task.product[0].available }}</td>
+                    <td>{{ task.product[0].count }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

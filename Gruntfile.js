@@ -4,12 +4,22 @@ module.exports = function (grunt)
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-protractor-webdriver');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
     var config = {
         app: 'app'
     };
+
+    var yeomanConfig = {
+        app: 'app',
+        dist: 'dist',
+        docs: 'documentation'
+    };
+    try {
+        yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
+    } catch (_error) {
+    }
 
     grunt.initConfig({
                 config: config,
@@ -52,15 +62,6 @@ module.exports = function (grunt)
                         }
                     }
                 },
-                protractor_webdriver: {
-                    driver: {
-                        options: {
-                            path: 'node_modules/.bin/',
-                            command: 'webdriver-manager start',
-                            keepAlive: true
-                        }
-                    }
-                },
                 jshint: {
                     default: {
                         options: {
@@ -91,10 +92,18 @@ module.exports = function (grunt)
                         }
                     }
                 }
-            }
+    }
     );
 
-    grunt.registerTask('serve', ['connect:livereload', 'watch']);
+    grunt.registerTask('serve', function (target)
+    {
+        if (target === 'dist') {
+            return grunt.task.run(['build', 'wiredep', 'configureProxies:server', 'connect:dist:keepalive']);
+        }
+        return grunt.task.run(['less', 'clean:server', 'configureProxies:server', 'connect:livereload', 'watch']);
+    });
 
+    grunt.registerTask('serve', ['connect:livereload', 'watch']);
+    grunt.registerTask('build', ['less']);
     grunt.registerTask('default', ['serve']);
 };

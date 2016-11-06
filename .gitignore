@@ -1,5 +1,8 @@
 .idea
+<<<<<<< HEAD
 app/bower_components
 node_modules
 npm-debug.log
 app/css/style.css
+=======
+>>>>>>> d166398730e2d4cd25969f7144c2658dbf30682a

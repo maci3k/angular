@@ -11,6 +11,11 @@
 
         ctrl.id = 1;
 
+        this.load = function(id) {
+            return HelloAngularDAO.getProduct(id).then(function (data) {
+                ctrl.product = data;
+            });
+        };
 
 
         (function init(){

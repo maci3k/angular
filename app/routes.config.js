@@ -10,6 +10,12 @@
                     controller: 'APIrestController as api'
                 });
 
+                $stateProvider.state('task', {
+                    url: '/task',
+                    templateUrl: 'modules/task/task.tpl.html',
+                    controller: 'TaskController as task'
+                });
+
                 $urlRouterProvider.otherwise('/api');
             }]);
 

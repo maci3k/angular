@@ -19,7 +19,7 @@
         <div class="navbar-header page-scroll">
             <a class="navbar-brand page-scroll" href="#page-top">Branch I</a>
         </div>
-        <a class="page-scroll btn btn-default docs pull-right" href="#page-top">Docs</a>
+        <a class="page-scroll btn btn-default docs pull-right" href="docs.pdf">Docs</a>
     </div>
 </nav>
 
@@ -27,33 +27,218 @@
     <div class="container">
         <div class="row">
             <div class="pull-left">
-                <button type="button" class="btn btn-primary">Default 1</button>
-                <button type="button" class="btn btn-primary">Default 2</button>
-                <button type="button" class="btn btn-primary">Default 3</button>
+                <button type="button" class="btn btn-primary" data-ng-click="app.showContent(1)">Hello Angular!</button>
+                <button type="button" class="btn btn-primary" data-ng-click="app.showContent(2)">Zastosowanie dyrektyw</button>
+                <button type="button" class="btn btn-primary" data-ng-click="app.showContent(3)">Zadanie praktyczne</button>
             </div>
             <div class="pull-right">
-                <button data-ng-click="app.content()" type="button" class="btn btn-success content">Treść</button>
+                <button ng-show="app.showInformation" data-ng-click="app.content()" type="button" class="btn btn-success content">Treść</button>
             </div>
+        </div>
+        <div class="jumbotron mainShowPadding" ng-show="app.mainShow">
+            <h1 ng-non-bindable>Wprowadzenie do {{Angular'a}}</h1>
         </div>
     </div>
 </section>
-<section data-ng-if="app.show">
+<section ng-show="app.showInformation" data-ng-if="app.show">
     <div class="container">
         <div class="row">
-            <p>Dogadać się z Dominikiem :P</p>
+            <p>Na podstawie zdobytych informacji przygotuj do validacji formularz za pomoca Angulara</p>
+            <ul>
+                <li>1. Dodaj walidację do textfiled "Nazwisko" bez powtarzania kodu z textfield "Imie"</li>
+                <li>2. Dodaj walidację do textfiled "Telefon", która będzie akceptowała 9 cyfr i wypisz informacje zwrotną na ekranie</li>
+                <li>3. Dodaj walidację do textfiled "email", która będzie akceptowała prawidłowo podany email i wypisz informacje zwrotną na ekranie</li>
+            </ul>
         </div>
     </div>
 </section>
 <section class="second">
     <div class="container">
-        <div class="row">
-            <p>Bacon ipsum dolor amet tongue sirloin pastrami chuck. Tenderloin pork chop hamburger flank biltong, pig leberkas pork corned beef pastrami short ribs prosciutto turducken beef ribs. Jowl pork tongue, jerky kielbasa ball tip porchetta tail frankfurter biltong turkey venison. Pig pancetta hamburger meatloaf rump shoulder capicola porchetta t-bone cupim picanha chuck pork pastrami andouille.
+        <div class="row" data-ng-if="app.showFirst">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Prosty przykład użycia Angular.
+                        <small ng-non-bindable>Witaj, {{imię}}</small>
+                    </h2>
+                </div>
+            </div>
+            <div class="jumbotron">
+                <h1>Witaj, {{name || 'nieznajomy!'}}</h1>
+                <input type="text" ng-model="name" placeholder="Podaj mi swoje imie ;)">
+            </div>
+            <p>Aplikacja "Witaj", choć bardzo prosta, demonostruje kilka ważnych funkcji Angulara:</p>
+            <ul>
+                <li>wyrażenia,</li>
+                <li>zakresy,</li>
+                <li>modele,</li>
+                <li>dwukierunkowe wiązanie danych</li>
+            </ul>
+            <p>Wszystkim tym można się posługiwać bez napisania choćby jednej linii kodu w JavaScripcie!</p>
+        </div>
+        <div class="row" data-ng-if="app.showSnd">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Zastosowanie dyrektyw.
+                        <small ng-non-bindable>Czyli magiczne ng</small>
+                    </h2>
+                </div>
+            </div>
+            <div class="jumbotron">
+                <h1>Ale co to jest?</h1>
+                <p>W istocie są to potężne funkcje, które można wywoływać z poziomu atrybutu albo nawet własnego niestandardowego elementu - w Angularze jest
+                    mnóstwo takich funkcji. Dzięki nim operacje takie jak zapętlanie przetwarzanie danych, obsługa kliknięć czy wysyłanie formularzy staje się
+                    szybkie
+                    i proste. </p>
+            </div>
+            <h2>Jak zacząć?</h2>
+            <p>Po pierwsze aby Angular był w stanie zadziać musimy zainicjalizować go na stronie; Zobacz jak to jest zrobione na przykładzie tego projektu w
+                pliku index.html; U samej góry w html znajduje sie atrybut ng-app="helloAngular".</p>
+            <p>Wszystkie inne dyrektywy, które będziemy używać na tych zajęciach, używa się podobnie - poprzez dodanie atrybutu do elementu.</p>
+            <p>Zanim zapoznamy się z poniższymi dyrektywami, musisz zapamiętać że treść poszczególnych funkcji dodaje się do kontrolera.</p>
+            <!--To tutaj zaczyna się przykład ng-click-->
 
-                Chicken pastrami venison burgdoggen t-bone beef ribs shankle shank rump chuck filet mignon doner turkey salami ground round. Beef ribs venison sirloin doner. Flank t-bone pork belly tenderloin, tail ham hock ground round sausage picanha jerky pork alcatra. Ball tip meatball boudin doner ham hock pork loin shoulder porchetta. Pancetta venison frankfurter alcatra tenderloin, drumstick turducken ground round sirloin hamburger meatball ball tip pastrami pork. T-bone shoulder burgdoggen filet mignon.
 
-                Ham hock boudin hamburger kevin shoulder. Turkey beef ribs strip steak capicola. Landjaeger fatback pork chop turkey. Fatback sausage filet mignon, turkey capicola meatball bacon short ribs t-bone. Bacon flank cupim pork belly.
+            <h2>Dyrektywy: </h2>
+            <ul>
+                <li>ng-click</li>
+                <p>Jedną z najprostrzych rzeczy, jaką możemy zrobić w JavaScipcie, jest przechwycenie zdarzenia kliknięcia. Można tego dokonać za pomocą
+                    atrybutu onclick dla elementu, bibliteki jQuery albo detektora zdarzenia (ang. listener). W Angularze używa się do tego dyrektywy
+                    ng-click</p>
+                <label>Bez obaw nie gryze sprawdź jak działa </label>
+                <button class="btn-success" ng-click="app.ngClick()"> ng-click</button>
+                <p>Jeżeli masz ochotę wyświetlić okno komunikatu w reakcji na wskazanie elementu kursorem myszy, a nie kliknięcie, to wystarczy zmienić nazwę
+                    dyrektywy na ng-mouseover. Spróbuj samodzielnie wykonać to zadanie</p>
 
-                Pork chop venison landjaeger, corned beef short loin biltong spare ribs pork loin. Ham fatback drumstick cow beef sirloin boudin. Beef ribs doner sausage pork chop meatloaf biltong short ribs. Pork loin pork chop turkey corned beef swine pastrami, ribeye doner shank. Bacon short loin swine corned beef tri-tip, hamburger leberkas chicken ball tip shank kielbasa turkey jerky pancetta andouille. Tri-tip shank bresaola kevin short loin pork chop beef ribs alcatra leberkas porchetta fatback pork belly.</p>
+                <li>ng-init</li>
+                <p>Dyrektywa ng-init służy do przetwarzania wyrażeń w bieżącym zakresie i może być używana samodzielnie lub w połączeniu z innymi dyrektywami.
+                    Ma ona wyższy priorytet niż inne dyrektywy, aby wyrażenie zostało przetworzeone odpowiednio wcześnie.</p>
+                <p>Oto prosty przykład zastosowania dyrektywy ng-init</p>
+                <pre>{{app.ngInit1}} <br> {{app.ngInit2}}</pre>
+                <p>Otwarcie strony z tym kodem w przeglądarce spowoduje wyświetlenie napisu "Witaj świecie". Jak widać, przypisanie wartnośći modelowi o nazwie
+                    test, a potem - za pomocą składni z podwójnymi nawiasami klamrowymi - wyświetliliśmy ją na ekranie</p>
+                <li>ng-show i ng-hide</li>
+                <p>W pewnych sytuacjach przydaje się możliwość sterowania wyświetlaniem jakiegoś elementu na drodze programowej. Dyrektywami ng-show i ng-hide
+                    można sterować za pośrednictwem wartnośći zwracanych przez funkcję albo model.</p>
+                <p>Do przycisku podpinamy przez ng-click funkcję która wygląda następująco:</p>
+                <pre>{{app.hideMeString}}</pre>
+                <p>Ten kod po prostu zmienia wartość modelu na przeciwną, co w rezultacie przełącza widoczność elementu. Taką zmienna wystarczy podpiąć za
+                    pomocą ng-hide lub ng-show do dowolnego elementu na stronie np div'a, pre, button itp.</p>
+                <button class="btn-danger" ng-click="app.hideMe()">Ukryj mnie!</button>
+                <div ng-hide="app.isHidden">
+                    <pre>Kliknij przycisk powyżej, aby ukryć wiadomość.</pre>
+                </div>
+                <p>Powyższy przykład sprawa, że element nie jest domyślnie ukryty. Istnieje kilka sposobów na zmianę tego stanu rzeczy. Pierwszy z nich polega
+                    na ustawieniu wartosci isHidden na true w kontrolerze. Można także wykorzystać dyrektywe ng-init. Ewentualnie użyć dyrektywy ng-show, która
+                    działa odwrotnie niż ng-hide</p>
+                <li>ng-if</li>
+                <p>Angular jest ponadto wyposażony w dyrektywę ng-if, której działanie jest podobne do ng-show i ng-hide. Z tym ng-if fizycznie usuwa element z
+                    drzewa DOM, podczas gdy ng-show i ng-hide tylko przełączają jego widoczność</p>
+                <p>Przyjrzyjmy się, jak można użyć dyrektwywy ng-if w odniesieniu do ng-show i ng-hide</p>
+                <pre>{{app.ngIf}}</pre>
+                <p>Jeśli chcielibyśmy odwrócić działanie instrukcji, wystarczyłoby poprzedzić wyrażenie wykrzyknikiem (ng-if="!isHidden")</p>
+
+                <li>ng-repeat</li>
+                <p>Podczas projektowania aplikacji internetowych bardzo szybko staniesz przed koniecznością wygenerowania tablicy elementów. Na przykład
+                    wyświetlenie listy kontaktów na stronie. Angular umożliwia realizowanie tego typu zadań za pomocą dyrektywy ng-repeat</p>
+                <p>Oto przykłądowa tablica obiektów z danymi zawierającymi kontakty:</p>
+                <pre>{{app.contactsString}}</pre>
+                <p>Mamy tutaj do czynienia z zaledwie dwiema osobami, ale nietrudno sobie wyobrazić, że tablica mogłaby zawierać setki kontaktów pozyskanych za
+                    pośrednictwem API, a z taką ilością informacji trudno byłoby pracować bez dyrektywy ng-reapeat</p>
+                <p>Aby wyświetlić imiona i nazwiska w nienumerowanej liście należy (bez użycia pętli) musisz użyć: </p>
+                <pre>{{app.showContact}}</pre>
+                <p>Działanie na żywo: </p>
+                <ul>
+                    <li ng-repeat="contact in app.contacts">
+                        {{contact.name}}
+                    </li>
+                </ul>
+                <p>Spróbuj zmodyfikować kod tak, aby wyświetlane były wszystkie informacje o użytkownikach</p>
+            </ul>
+            <h2>Podsumowując:</h2>
+            <p>W tej sekcji omówiliśmy wiele zagadnień, zanim więc przejdziemy do kolejnego już praktycznego zadania, podsumujmy zdobyte wiadomości.</p>
+            <p>Dyrektywy Angulara to funcje, które Angular pozwala wywoływać z poziomu widoku (HTML). Zanim możemy je wykorzystać musimy utworzyć tak zwany
+                kontroler, czyli funkcję, do której możęmy przekazywać usługi Angulara za pośrednictwem procesu zwanego wstrzykiwaniem zależności.</p>
+            <p>Dyrektywy takie jak ng-click i ng-mouse są po prostu nowymi sposobami obsług zdarzeń, które dotychczas trzeba było obsługiwać np. za
+                pośrednictwem jQuery albo czystego JavaScriptu. Z kolei dyrektywy w rodzaju ng-repeat "przemycają" do widoku pewne przydatne mechanizmy, na
+                przykład pętle umożliwiające cykliczne przetwarzanie danych i wyświetlanie ich na stronie.</p>
+
+            <h3>Wykorzystaj zdobyte informacje w celu rozwiązania praktycznego kolejnych zadań. Powodzenia ;)</h3>
+        </div>
+        <div class="row" data-ng-if="app.showThr">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Zadanie praktyczne
+                        <small ng-non-bindable>Dodaj kontakt</small>
+                    </h2>
+                </div>
+                <div class="alert alert-success" ng-show="app.success">{{app.info}}</div>
+                <div class="alert alert-danger" ng-show="app.fail">{{app.info}}</div>
+
+                <form class="form-horizontal" ng-submit="submit()">
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label for="name" class="col-sm-4 control-label">Imię</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="name" class="form-control" ng-model="app.contact.name" ng-keyup="app.checkName(app.contact.name)">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name" class="col-sm-4 control-label">Nazwisko</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="lastname" class="form-control" ng-model="app.contact.lastName">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone" class="col-sm-4 control-label">Telefon</label>
+                                <div class="col-sm-8">
+                                    <input type="tel" id="phone" class="form-control" ng-model="app.contact.phone" ng-keyup="app.checkPhone(app.contact.phone)">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address" class="col-sm-4 control-label">Adres</label>
+                                <div class="col-sm-8">
+                                    <textarea id="address" class="form-control" ng-model="app.contact.address"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label for="email" class="col-sm-4 control-label">Adres e-mail</label>
+                                <div class="col-sm-8">
+                                    <input type="email" id="email" class="form-control" ng-model="app.contact.email" ng-keyup="app.checkEmail(app.contact.email)">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="website" class="col-sm-4 control-label">Strona WWW</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="website" class="form-control" ng-model="app.contact.website">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="notes" class="col-sm-4 control-label">Uwagi</label>
+                                <div class="col-sm-8">
+                                    <textarea id="notes" class="form-control" ng-model="contact.notes" bs-tooltip data-title="Pomocnicze informacje o kontakcie." data-trigger="focus" data-placement="bottom"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group well">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" class="btn btn-primary" value="Dodaj kontakt">
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
 </section>
@@ -65,11 +250,11 @@
     </div>
 </footer>
 
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="app.module.js"></script>
-    <script src="app.controller.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="app.module.js"></script>
+<script src="app.controller.js"></script>
 
 </body>
 </html>

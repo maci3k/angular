@@ -7,9 +7,6 @@
     {
         return {
             restrict: 'ACE',
-            scope: {
-                task: '='
-            },
             controller: 'NavBar',
             controllerAs: 'nav',
             templateUrl: 'directive/navBar.tpl.html'

@@ -6,7 +6,6 @@
     {
         var api = $resource('https://ngtests.herokuapp.com/api/:a/:b/', null, {
             getProducts: { isArray: true, method: 'GET', params: {a: 'products'}},
-            // getProductById: { isArray: true, method: 'GET', params: {a: 'product'}}
         });
 
         return {
@@ -14,10 +13,6 @@
             {
                 return api.getProducts().$promise;
             }
-            // getProductById: function (id)
-            // {
-            //     return api.getProductById({b: id}).$promise;
-            // }
         };
     }
 

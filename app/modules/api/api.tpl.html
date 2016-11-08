@@ -62,6 +62,20 @@
             Pobieramy dany produkt po podaniu danego <strong>id</strong>.
             Produkt jest opadkowany w tablicę
         </pre></p>
+
+            <hr>
+            <h2>stateProvider</h2>
+            <p>Pierwszym zadaniem będzie zapoznanie się mechanizem przełączenia widoków w AngularJS. W pliku routes.config.js znajduje się kod odpowiedzialny za przełączenie widoków.
+            <pre>
+            $stateProvider.state('task', {
+                    url: '/task',
+                    templateUrl: 'modules/task/task.tpl.html',
+                    controller: 'TaskController as task'
+                });
+        </pre>
+            </p>
+
+            <p>Skopiuj powyzszy kod do pliku <strong>routes.config.js</strong>, aby odblokować widok z kolejnym zadaniem.</p></p>
         </div>
     </div>
 </section>

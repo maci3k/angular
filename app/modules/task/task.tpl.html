@@ -8,14 +8,15 @@
                 <strong>api, dao oraz task</strong>. api oraz task są to widoki, które posiadają controller oraz szablon. W katalogu dao znajduje się serwis
                 odpowiedzialny za pobranie danych z serwera.</p>
 
-            <p>1. Pierwszym zadaniem będzie po przeanalizowaniu pliku <strong>task.controller.js</strong> w katalogu <strong>modules/task</strong> wpisanie
+
+            <p>2. Pierwszym zadaniem będzie po przeanalizowaniu pliku <strong>task.controller.js</strong> w katalogu <strong>modules/task</strong> wpisanie
                 odpowiedniego ciała dyrektywy <strong>ng-repeat</strong> w linijce 32. Dane, które zostaną wyświetlone będą danymipobranymi z serwera. Zauważ,
                 że po pobraniu danych możesz wyszukiwać produkty po nazwie. Tak działają <strong>filtry</strong> w ng-repeat.</p>
             <div class="col-xs-12">
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">szukaj po nazwie: </span>
-                        <input type="search" class="form-control" ng-model="searchTest.name">
+                        <input type="search" class="form-control" data-ng-model="searchTest.name">
                     </div>
                 </div>
             </div>
@@ -36,17 +37,33 @@
                 </tr>
                 </tbody>
             </table>
-            <p>2. Kolejnym zadaniem będzie zmodyfikowanie pliku w katalogu <strong>modules/dao</strong> poprzez dodanie api pobrania pojedynczego produktu.
+            <p>3. Kolejnym zadaniem będzie zmodyfikowanie pliku w katalogu <strong>modules/dao</strong> poprzez dodanie api pobrania pojedynczego produktu.
                 Następnie stworzenie funkcji <strong>load(id)</strong>, która będzie odpowiedzialna za pobranie danego produktu. </p>
-                <p>Dodanie w odpowiednich miejscach do resource pliku DAO
-                <pre>        getProductById: { isArray: true, method: 'GET', params: {a: 'product'}}
+            <p>Dodanie w odpowiednich miejscach do resource pliku DAO
+            <pre>        getProductById: { isArray: true, method: 'GET', params: {a: 'product'}}
 
         oraz
 
         getProductById: function (id)
         {
             return api.getProductById({b: id}).$promise;
-        }</pre></p>
+        }</pre>
+            </p>
+            oraz
+            <pre>getProductById: { isArray: true, method: 'GET', params: {a: 'product'}}</pre>
+            <p>w <strong>helloAngularDAO.factory.js</strong></p>
+            <p>Następnie skopiuj kod odpowiedzialny za ładowanie pojedynczego produktu. Jest to funkcja <strong>load</strong>, która wykorzystuje połączenie
+                DAO, korzystająć z mechanizmu obietnic pobiera dany produkt.
+            <pre>
+            this.load = function (id){
+            return HelloAngularDAO.getProductById(id).then(function (data)
+            {
+                ctrl.product = data;
+                console.log(ctrl.product);
+            });
+        };
+        </pre></p>
+            <p>Kod umieść w pliku <strong>task.controller.js</strong> </p>
             <input type="text" class="form-control col-xs-2" data-ng-model="task.id">
             <button data-ng-click="task.load(task.id)" class="btn bg-success pull-right">Wczytaj</button>
 

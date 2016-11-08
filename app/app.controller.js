@@ -89,12 +89,32 @@
 
         ctrl.checkPhone = function (phone)
         {
-
+            var numbers = /^[0-9]{9}/;
+            if(phone.match(numbers)) {
+                ctrl.info = 'Podales prawidlowy numer telefonu';
+                ctrl.success = true;
+                ctrl.fail = false;
+            } else {
+                ctrl.info = 'Ojoj coś jest nie tak ;<';
+                ctrl.success = false;
+                ctrl.fail = true;
+            }
         };
 
         ctrl.checkEmail = function (email)
         {
+            var regex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+            //nie oszustwo! po prostu wiedza jak używać google
 
+            if (email.match(regex)) {
+                ctrl.info = 'Podales prawidlowy mail';
+                ctrl.success = true;
+                ctrl.fail = false;
+            } else {
+                ctrl.info = 'Ojoj coś jest nie tak ;<';
+                ctrl.success = false;
+                ctrl.fail = true;
+            }
         };
 
         // A to tylko śmieci do obsługi tego toturialu ;)

@@ -6,6 +6,8 @@
     {
         var ctrl = this;
 
+        this.title = 'Tworzenie własnej dyrektywy';
+
         this.content = function (){
             ctrl.show = !ctrl.show;
             console.log(ctrl.show);
